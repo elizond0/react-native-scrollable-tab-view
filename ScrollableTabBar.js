@@ -60,6 +60,10 @@ const ScrollableTabBar = createReactClass({
   },
 
   updateView(offset) {
+    // 解决bug 第一次加载没有下划线的问题 默认进来是undefined 所以不显示内容
+    if (offset.value === undefined) {
+      offset.value = this.props.activeTab;
+    }
     const position = Math.floor(offset.value);
     const pageOffset = offset.value % 1;
     const tabCount = this.props.tabs.length;
